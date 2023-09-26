@@ -9,11 +9,10 @@ public class MineSweeper{
 
     Scanner input = new Scanner(System.in);
     Random randomMineNumber = new Random();
-
     public void run(){
         System.out.println("Mayın Tarlası Oyuna Hoşgeldiniz!");
 
-        //Kullanıcıdan satır ve sütun sayısını aldım.
+        //Kullanıcıdan oluşacak haritanın satır ve sütun sayısını aldım.
         System.out.print("Satır Sayısını Giriniz:  ");
         row = input.nextInt();
         System.out.print("Sütun Sayısını Giriniz: ");
@@ -43,15 +42,17 @@ public class MineSweeper{
                 map[rowMineNumber][columnMineNumber] = "*";
                 count++;
             }
-
         }
+
         printBoard();
+
         playCheck();
     }
 
     public void playCheck(){
         System.out.println("Oyun Başladı!");
         while(!finish){
+            //Kullanıcıdan seçeceği nokta için satır ve sütun sayısını istedim.
             System.out.print("Satır Sayısı: ");
             int selectedRow = input.nextInt();
             System.out.print("Sütun Sayısı: ");
@@ -61,18 +62,20 @@ public class MineSweeper{
             //Kullanıcının girdiği konumda etrafındaki mayın sayısını yazdırdım.
             if(selectedRow < row && selectedColumn < column){
                 if(map[selectedRow][selectedColumn].equals("-") && board[selectedRow][selectedColumn].equals("-")){
-                    for(int i = selectedRow - 1; i < selectedRow + 2; i++){
-                        for(int j = selectedColumn - 1; j < selectedColumn + 2; j++){
+                    for(int i = selectedRow - 1; i <= selectedRow + 1; i++){
+                        for(int j = selectedColumn - 1; j <= selectedColumn + 1; j++){
                             if(i >= 0 && j >= 0 && i < row && j < column && map[i][j].equals("*")){
                                 mineNumber++;
-                                board[selectedRow][selectedColumn] = Integer.toString(mineNumber);
-                            }else{
+                                //Dizilerim string tipinde olduğu için mineNumber'ımı (integerımı) haritaya yazdırabilmek için bu şekilde stringe çevirmiş oldum.
                                 board[selectedRow][selectedColumn] = Integer.toString(mineNumber);
                             }
-
+                            else{
+                                board[selectedRow][selectedColumn] = Integer.toString(mineNumber);
+                            }
                         }
                     }
                     printBoard();
+
                     //Eğer kullanıcı oyunu kazanırsa oluşacak senaryo.
                     if(!checkWin()){
                         System.out.println("Tebrikler! Hiçbir mayına basmadan oyunu tamamladınız.");
@@ -80,16 +83,18 @@ public class MineSweeper{
                         finish = true;
                     }
                     //Eğer kullanıcı oyunu kaybederse oluşacak senaryo.
-                }else if(map[selectedRow][selectedColumn].equals("*")){
+                }
+                else if(map[selectedRow][selectedColumn].equals("*")){
                     System.out.println(" Mayına bastınız! Kaybettiniz!");
                     printMap();
                     finish = true;
                     //Eğer kullanıcı tekrar aynı konumu girerse oluşacak senaryo.
-                }else if(!board[selectedRow][selectedColumn].equals("-")){
+                }
+                else if(!board[selectedRow][selectedColumn].equals("-")){
                     System.out.println("Daha önce bu konumu verdiniz. Tekrar Girin: ");
                 }
-
             }
+
             //Kullanıcı yanlış konum girerse oluşacak senaryo.
             else{
                 System.out.println("Yanlış Girdiniz! Harita sınırları içerisinde bir konum seçiniz.");
