@@ -10,7 +10,7 @@ public class MineSweeper{
     Scanner input = new Scanner(System.in);
     Random randomMineNumber = new Random();
     public void run(){
-        System.out.println("Mayın Tarlası Oyuna Hoşgeldiniz!");
+        System.out.println("Mayın Tarlası Oyununa Hoş Geldiniz!");
 
         //Kullanıcıdan oluşacak haritanın satır ve sütun sayısını aldım.
         System.out.print("Satır Sayısını Giriniz:  ");
@@ -77,21 +77,25 @@ public class MineSweeper{
                     printBoard();
 
                     //Eğer kullanıcı oyunu kazanırsa oluşacak senaryo.
-                    if(!checkWin()){
+                    if(checkWin()){
                         System.out.println("Tebrikler! Hiçbir mayına basmadan oyunu tamamladınız.");
+                        //Kullanıcının mayınların nerede olduğunu görmesi için oyun sonunda mayın haritasını bastırıyorum.
                         printMap();
                         finish = true;
                     }
-                    //Eğer kullanıcı oyunu kaybederse oluşacak senaryo.
                 }
+
+                //Eğer kullanıcı oyunu kaybederse oluşacak senaryo.
                 else if(map[selectedRow][selectedColumn].equals("*")){
-                    System.out.println(" Mayına bastınız! Kaybettiniz!");
+                    System.out.println("Mayına bastınız! Kaybettiniz!");
+                    //Kullanıcının mayınların nerede olduğunu görmesi için oyun sonunda mayın haritasını bastırıyorum.
                     printMap();
                     finish = true;
-                    //Eğer kullanıcı tekrar aynı konumu girerse oluşacak senaryo.
                 }
+
+                //Eğer kullanıcı tekrar aynı konumu girerse oluşacak senaryo.
                 else if(!board[selectedRow][selectedColumn].equals("-")){
-                    System.out.println("Daha önce bu konumu verdiniz. Tekrar Girin: ");
+                    System.out.println("Daha önce bu konumu verdiniz. Tekrar Giriniz. ");
                 }
             }
 
@@ -102,7 +106,7 @@ public class MineSweeper{
         }
     }
 
-    //Kullanıcıya oyun sonunda mayın yerlerini göstermek için mayın haritasını bastırıyorum.
+    //Mayin haritası
     public void printMap(){
         for(String[] row:map){
             for(String column: row){
@@ -111,7 +115,7 @@ public class MineSweeper{
             System.out.println();
         }
     }
-    //Haritayı ekrana bastırıyorm.
+    //Oyun haritası
     public void printBoard(){
         for(String[] row:board){
             for(String column: row){
@@ -122,7 +126,7 @@ public class MineSweeper{
         System.out.println("====================");
     }
 
-    //Kullanıcı ilk girişinde mayına basmazsa orada oyunu bitiriyordu. Böyle bir metodla onu engelledim.
+    //Kullanıcının oyunu ne zaman kaybedip ne zaman kazandığının kontrolünü sağladığım kısım.
     boolean checkWin(){
         int emptyCell=0;
         int minedCell=0;
@@ -137,8 +141,8 @@ public class MineSweeper{
             }
         }
         if(emptyCell == minedCell){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }
