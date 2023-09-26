@@ -1,6 +1,10 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        MineSweeper mine = new MineSweeper()(3,3);
+        Scanner input = new Scanner(System.in);
+
+        MineSweeper mine = new MineSweeper();
         mine.run();
     }
 }
