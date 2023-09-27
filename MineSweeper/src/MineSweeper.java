@@ -43,6 +43,8 @@ public class MineSweeper{
                 count++;
             }
         }
+        printMap();
+        System.out.println("====================");
 
         printBoard();
 
