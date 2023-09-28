@@ -12,27 +12,26 @@ public class MineSweeper{
     public void run(){
         System.out.println("Mayın Tarlası Oyununa Hoş Geldiniz!");
 
-        //Kullanıcıdan oluşacak haritanın satır ve sütun sayısını aldım.
+        //Kullanıcıdan oluşacak haritanın satır ve sütun sayısını aldım.(Temel Fonksiyonlar 3.)
         System.out.print("Satır Sayısını Giriniz:  ");
         row = input.nextInt();
         System.out.print("Sütun Sayısını Giriniz: ");
         column = input.nextInt();
 
-        //Mayınları eleman sayısının çeyreği olacağı şekilde tanımladım.
+        //Mayınları eleman sayısının çeyreği olacağı şekilde tanımladım.(Temel Fonksiyonlar 4. Uygun sayıda mayın)
         mineNumber = (row*column) / 4;
 
         //Mayınların konumlarını tutacak bir dizi ve kullanıcıya sunulacak bir dizi oluşturduk.
         map = new String[row][column];
         board = new String[row][column];
 
-        //Kullanıcıdan alınan verilere göre
         for(int i=0; i<row; i++){
             for(int j=0; j<column; j++){
                 board[i][j] = "-";
                 map[i][j] = "-";
             }
         }
-        //Mayınların haritaya rastgele yerleşmesi ve aynı noktaya tekrar yerleşmemesi için while döngüsü ve if kullandım.
+        //Mayınların haritaya rastgele yerleşmesi ve aynı noktaya tekrar yerleşmemesi için while döngüsü ve if kullandım.(Temel Fonksiyonlar 4.)
         int count = 0;
         while(count != mineNumber){
             int rowMineNumber = randomMineNumber.nextInt(row);
@@ -54,21 +53,21 @@ public class MineSweeper{
     public void playCheck(){
         System.out.println("Oyun Başladı!");
         while(!finish){
-            //Kullanıcıdan seçeceği nokta için satır ve sütun sayısını istedim.
+            //Kullanıcıdan seçeceği nokta için satır ve sütun sayısını istedim.(Temel Fonksiyonlar 5.)
             System.out.print("Satır Sayısı: ");
             int selectedRow = input.nextInt();
             System.out.print("Sütun Sayısı: ");
             int selectedColumn = input.nextInt();
 
             int mineNumber=0;
-            //Kullanıcının girdiği konumda etrafındaki mayın sayısını yazdırdım.
+            //Kullanıcının girdiği konumda etrafındaki mayın sayısını yazdırdım.(Temel Fonksiyonlar 8.)
             if(selectedRow < row && selectedColumn < column){
                 if(map[selectedRow][selectedColumn].equals("-") && board[selectedRow][selectedColumn].equals("-")){
                     for(int i = selectedRow - 1; i <= selectedRow + 1; i++){
                         for(int j = selectedColumn - 1; j <= selectedColumn + 1; j++){
                             if(i >= 0 && j >= 0 && i < row && j < column && map[i][j].equals("*")){
                                 mineNumber++;
-                                //Dizilerim string tipinde olduğu için mineNumber'ımı (integerımı) haritaya yazdırabilmek için bu şekilde stringe çevirmiş oldum.
+                                //Dizilerim string tipinde olduğu için haritaya yazdırabilmek için type casting kullandım.
                                 board[selectedRow][selectedColumn] = Integer.toString(mineNumber);
                             }
                             else{
@@ -76,9 +75,10 @@ public class MineSweeper{
                             }
                         }
                     }
+                    //(Temel Fonksiyonlar 7.) Oyun alanı her seferinde güncelleniyor.
                     printBoard();
 
-                    //Eğer kullanıcı oyunu kazanırsa oluşacak senaryo.
+                    //Eğer kullanıcı oyunu kazanırsa oluşacak senaryo.(Temel Fonksiyonlar 10.-11)
                     if(checkWin()){
                         System.out.println("Tebrikler! Hiçbir mayına basmadan oyunu tamamladınız.");
                         //Kullanıcının mayınların nerede olduğunu görmesi için oyun sonunda mayın haritasını bastırıyorum.
@@ -87,7 +87,7 @@ public class MineSweeper{
                     }
                 }
 
-                //Eğer kullanıcı oyunu kaybederse oluşacak senaryo.
+                //Eğer kullanıcı oyunu kaybederse oluşacak senaryo.(Temel Fonksiyonlar 9.-11.)
                 else if(map[selectedRow][selectedColumn].equals("*")){
                     System.out.println("Mayına bastınız! Kaybettiniz!");
                     //Kullanıcının mayınların nerede olduğunu görmesi için oyun sonunda mayın haritasını bastırıyorum.
@@ -101,7 +101,7 @@ public class MineSweeper{
                 }
             }
 
-            //Kullanıcı yanlış konum girerse oluşacak senaryo.
+            //Kullanıcı yanlış konum girerse oluşacak senaryo.(Temel Fonksiyonlar 6.)
             else{
                 System.out.println("Yanlış Girdiniz! Harita sınırları içerisinde bir konum seçiniz.");
             }
@@ -128,7 +128,7 @@ public class MineSweeper{
         System.out.println("====================");
     }
 
-    //Kullanıcının oyunu ne zaman kaybedip ne zaman kazandığının kontrolünü sağladığım kısım.
+    //Kullanıcının oyunu ne zaman kaybedip ne zaman kazandığının kontrolünü sağladığım kısım.(Temel Fonksiyonlar 9-10)
     boolean checkWin(){
         int emptyCell=0;
         int minedCell=0;
