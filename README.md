@@ -8,4 +8,4 @@ Hoş Geldiniz!
 4) Girdiğiniz noktada mayın var ise oyunu kaybedersiniz.  
 5) Oyunu kazanmak için hiçbir mayına basmamalısınız.  
 
-                             İyi Eğlenceler!
+                                                    İyi Eğlenceler!
