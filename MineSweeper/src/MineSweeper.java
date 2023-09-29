@@ -9,6 +9,8 @@ public class MineSweeper{
 
     Scanner input = new Scanner(System.in);
     Random randomMineNumber = new Random();
+
+    //Oyunu çalıştıran metot.(Temel Fonksiyonlar 2.)
     public void run(){
         System.out.println("Mayın Tarlası Oyununa Hoş Geldiniz!");
 
@@ -50,6 +52,7 @@ public class MineSweeper{
         playCheck();
     }
 
+    ////Oyunu kontrol eden metot.(Temel Fonksiyonlar 2.)
     public void playCheck(){
         System.out.println("Oyun Başladı!");
         while(!finish){
@@ -108,7 +111,7 @@ public class MineSweeper{
         }
     }
 
-    //Mayin haritası
+    //Mayın haritasını yazdıran metot.(Temel Fonksiyonlar 2.)
     public void printMap(){
         for(String[] row:map){
             for(String column: row){
@@ -117,7 +120,7 @@ public class MineSweeper{
             System.out.println();
         }
     }
-    //Oyun haritası
+    //Oyunu haritasını yazdıran metot.(Temel Fonksiyonlar 2.)
     public void printBoard(){
         for(String[] row:board){
             for(String column: row){
@@ -128,7 +131,7 @@ public class MineSweeper{
         System.out.println("====================");
     }
 
-    //Kullanıcının oyunu ne zaman kaybedip ne zaman kazandığının kontrolünü sağladığım kısım.(Temel Fonksiyonlar 9-10)
+    //Kullanıcının oyunu ne zaman kaybedip ne zaman kazandığının kontrolünü sağladığım metot.(Temel Fonksiyonlar 2-9-10)
     boolean checkWin(){
         int emptyCell=0;
         int minedCell=0;
